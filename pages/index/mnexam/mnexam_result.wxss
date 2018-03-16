@@ -1,0 +1,264 @@
+/* pages/index/mnexam/mnexam_result.wxss */
+/* pages/index/mnexam/mnexam_body.wxss */
+.answer_letter {
+  font-weight: 700;
+
+}
+.hidden-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    width: 100%;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+
+
+}
+
+.check-box {
+display: flex;
+flex-direction: row;
+width: 100%;
+padding: 20rpx;
+
+}
+.hidden-userDid {
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid #aaa;
+  height:100rpx;
+  line-height: 100rpx;
+
+}
+.hidden-userComment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.hidden-box {
+   display: flex;
+  flex-direction: column;
+   width: 100%;
+  border-bottom: 1px solid #aaa;
+}
+
+.hidden-userInfo {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+
+
+.userinfo-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  line-height: 96rpx;
+
+}
+
+.hidden-userInfo-left {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.hidden-userInfo-right {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;  
+  padding-right: 10rpx;
+  color: #aaa;
+}
+
+.hidden-comment {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 14px;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.hidden-writenote {
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+padding: 10rpx;
+width: 100%;
+
+}
+
+.hidden-comment-text {
+  border: 1px solid #aaa;
+width:70%;
+}
+
+.hidden-comment-submit {
+
+}
+
+
+.colorGreen {
+  color: green;
+}
+.body-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+}
+
+.firstcol-item {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+.userinfo-avatar {
+  border-radius: 50%;
+  height: 80rpx;
+  width: 80rpx;
+
+}
+
+.userinfo-nickname {
+  color: #ef7429;
+  font-size: 48rpx;   
+
+}
+.fixedView {
+   display: flex;
+   flex-direction: column;
+   width: 98%;
+
+
+   z-index: 9999;
+}
+.itemBody {
+  position: relative;
+
+  z-index: 10;
+}
+.cols {
+  display: flex;
+  font-size: 16px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #aaa;
+  height: 80rpx;
+  margin: 16rpx;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+}
+
+.cols-text-color {
+  color: red;
+}
+
+.submitbutton {
+  border: 1px solid blue;
+  background-color: greenyellow;
+}
+
+.submitbutton-hover {
+  background-color: red;
+}
+
+
+.secondcol {
+  display: flex;
+}
+
+.body-body {
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  font-size: 16px;
+  align-items: center;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-top: 10rpx;
+}
+
+.body-content {
+margin-bottom: 10rpx;
+}
+.keyword {
+  color: red;
+  text-decoration: underline;
+}
+
+.body-answer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+
+}
+
+.radio-answer {
+display: flex;
+flex-direction: row;
+width: 100%;
+margin: 65rpx;
+}
+
+.body-bottom {
+  display: flex;
+}
+
+.body-analysis {
+  border-bottom: 1px solid #aaa;  
+  width: 100%;
+  margin-top: 10rpx;
+  padding-bottom: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.commentButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height:96rpx;
+}
+
+.body-analysis-row {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}

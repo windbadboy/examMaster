@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='userInfo-container'>
+    <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}" wx:if="{{userInfo.avatarUrl!=''}}"></image>
+     <image class='userinfo-avatar' src="../image/visitor.png" wx:else></image>   
+    <text class='userinfo-nickname'>{{userInfo.nickName}}</text>
+  </view>
+
+  <view class='body-container'>
+    <view class='upper-menu'>
+      <view class='choose-course' bindtap='chooseCourse' style="background-color:{{bgcolor}}">
+        <view class='courseInfo'>
+          <text>{{courseInfo}}</text>
+        </view>
+        <text class='chooseCourseDetail'>选 课</text>
+      </view>
+      <view class='choose-course otherCourse' style="background-color:{{bgcolor_syl}}" bindtap='mnexam'>模拟试题</view>
+
+      <view class='choose-course otherCourse' style="background-color:{{bgcolor_zt}}" bindtap='realitem'>历年真题</view>
+      <view class='choose-course otherCourse' style="background-color:{{bgcolor_other}}" bindtap='iSubimit'>我来出题</view>
+    </view>
+  </view>
+</view>

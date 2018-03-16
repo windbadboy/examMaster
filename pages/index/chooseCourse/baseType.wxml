@@ -1,0 +1,4 @@
+<!--pages/index/chooseCourse/baseType.wxml-->
+<view class='chooseCourse' wx:for="{{course}}" wx:key="{{index}}">
+<view class='courses' hover-class='selectedcourses' bindtap='chooseNext' data-baseTypeId="{{item.baseTypeId}}" >{{item.baseTypeName}}</view>
+</view>

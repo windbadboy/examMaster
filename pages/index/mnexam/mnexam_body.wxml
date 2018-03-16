@@ -1,0 +1,33 @@
+<!--pages/index/mnexam/mnexam_body.wxml-->
+<import src="mnexam_tpl.wxml" />
+<view class='body-container'>
+  <view class='cols'>
+    <view class='userInfo-container'>
+      <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}"></image>
+    </view>
+    <view>
+      <text class='userinfo-nickname'>{{userInfo.nickName}}</text>
+    </view>
+    <view class='title'>随意练</view>
+  </view>
+  <view class='cols'>
+    <view class='firstcol-item'>
+      已做:
+      <text class='cols-text-color'>{{examdid}}</text>
+    </view>
+    <view class='firstcol-item'>
+      待做:
+      <text class='cols-text-color'>{{examleft}}</text>
+    </view>
+    <view class='firstcol-item counter'>
+      {{clock}}
+      <button size='mini' class='submitbutton' bindtap='isPause' hover-class='submitbutton-hover' style="background-color:{{pauseButton}}">{{isPause}}</button>
+    </view>
+    <view class='firstcol-item .counter'>
+      <button type='primary' size='mini' class='submitbutton' bindtap='submitExam'>交卷</button>
+    </view>
+  </view>
+  <template is="exam_tpl" data="{{examSingleData,answerShow,answerButtonShow,examNextPage,examPrevPage}}" />
+
+
+</view>

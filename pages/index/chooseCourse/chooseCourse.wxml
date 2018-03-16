@@ -1,0 +1,20 @@
+<!--pages/index/chooseCourse/chooseCourse.wxml-->
+<!--第一次循环，获取categoryId-->
+<view class='chooseCourse' wx:for="{{course}}" wx:key="{{index}}">
+  <view class='courses-container'>
+    <view class='courses' hover-class='selectedcourses' bindtap='chooseNext' data-index="{{index}}">{{item.categoryName}}
+    </view>
+    <view hidden='{{item.isHidden}}'>
+      <view class='subCourses' wx:for="{{item.subType}}" wx:key="{{index}}">
+        <view class='subCoursesContent' bindtap='chooseSubCourses' data-index='{{index}}'>
+          {{item.subTypeName}}
+        </view>
+        <view hidden="{{item.isHidden}}">
+          <view class='baseCourses' wx:for="{{item.baseType}}" wx:key="{{index}}">
+            <view class='baseCoursesContent' bindtap='chooseBaseCourses' data-index='{{index}}'>{{item.baseTypeName}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

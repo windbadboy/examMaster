@@ -1,0 +1,72 @@
+<template name="exam_tpl">
+  <view class='cols'>
+    <view class='firstcol-item'>
+      {{examSingleData.typeName}}
+    </view>
+    <view class='firstcol-item'>
+      网友首次正确率:
+      <text class='cols-text-color'>{{examSingleData.firstRightRate}}%</text>
+    </view>
+    <view class='firstcol-item'>
+      {{examSingleData.modeName}}
+    </view>
+  </view>
+  <view class='body-body'>
+    <view class='body-content'>
+      <block wx:if="{{examSingleData.typeId==1}}">
+        <text>{{examSingleData.tempSn}}. {{examSingleData.firstSentence}}<text class='keyword'>{{examSingleData.keyWord}}</text>{{examSingleData.lastSentence}}</text>
+      </block>
+      <block wx:elif="{{examSingleData.typeId==7 || examSingleData.typeId==8}}">
+        <text>{{examSingleData.tempSn}}. {{examSingleData.examBody}}</text>
+
+
+      </block>
+      <block wx:else>
+        <scroll-view scroll-y style="height: 100px; margin-bottom:10rpx;">
+          <text>{{examSingleData.examBody}}</text>
+        </scroll-view>
+      </block>
+      <view class='examBodyImg' wx:if="{{examSingleData.examBodyImg!=''}}">
+        <image src="http://www.badteacher.club/{{examSingleData.examBodyImg}}" style="width:350px;height:140px"></image>
+      </view>
+      <view class='examBodyOther' wx:if="{{examSingleData.examBodyOther!=''}}">
+        <text>{{examSingleData.examBodyOther}}</text>
+      </view>
+    </view>
+    <view class='body-answer'>
+      <view wx:if="{{examSingleData.typeId!=1 && examSingleData.typeId!=7 && examSingleData.typeId!=8}}">
+        <text>{{examSingleData.tempSn}}. {{examSingleData.answerTitle}}</text>
+      </view>
+      <view wx:if="{{examSingleData.typeId==8}}">
+        <checkbox-group bindchange="checkboxChange">
+          <label  wx:for="{{examSingleData.examAnswer}}" wx:key="{{index}}" class="check-box">
+            <checkbox value="{{item.answer_letter}}" checked="{{item.checked==1}}" />
+
+            <text class='answer_letter'>{{item.answer_letter}}. {{item.answerContent}}</text>
+          </label>
+        </checkbox-group>
+      </view>
+      <view wx:else>
+        <radio-group class="radio-group" bindchange="radioChange" data-index="{{index}}">
+          <label class="radio" wx:for="{{examSingleData.examAnswer}}" class='radio-answer' wx:key="{{index}}">
+            <radio value="{{item.answer_letter}}" checked="{{item.checked==1}}" />
+            <text class='answer_letter'>{{item.answer_letter}}. {{item.answerContent}}</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+
+  <view class='bottomfix'>
+    <view class='firstcol-item'>
+      <button type='primary' size='mini' class='submitbutton' bindtap='goPrevPage' data-prevPage="{{examPrevPage}}">上一题</button>
+    </view>
+    <view class='firstcol-item'>
+      <button type='primary' size='mini' class='submitbutton' bindtap='submitbutton' wx:if="{{examSingleData.isSubmitted}}" style="background-color:red">修改</button>
+      <button type='primary' size='mini' class='submitbutton' bindtap='submitbutton' wx:else>提交</button>
+    </view>
+    <view class='firstcol-item'>
+      <button type='primary' size='mini' class='submitbutton' bindtap='goNextPage' data-nextPage="{{examNextPage}}">下一题</button>
+    </view>
+  </view>
+</template>

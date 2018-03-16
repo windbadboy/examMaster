@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/index/chooseCourse/chooseCourse",
+    "pages/index/chooseCourse/subType",
+    "pages/index/chooseCourse/baseType",
+    "pages/index/mnexam/mnexam_menu",
+    "pages/index/mnexam/mnexam_body",
+    "pages/index/mnexam/mnexam_result"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "ExamMaster",
+    "navigationBarTextStyle": "black"
+  }
+}

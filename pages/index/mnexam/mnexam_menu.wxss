@@ -1,0 +1,31 @@
+/* pages/index/mnexam/mnexam_menu.wxss */
+
+
+.mnexam-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mnexam-syl {
+  margin: 20rpx auto;
+  height: 100rpx;
+  width: 500rpx;
+  line-height: 100rpx;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.mnexam-focus {
+  margin: 20rpx auto;
+  height: 100rpx;
+  width: 500rpx;
+  line-height: 100rpx;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.pickercss {
+  font-size: 24px;
+}

@@ -1,0 +1,39 @@
+<!--pages/index/mnexam/mnexam_result.wxml-->
+<import src="exam_result_tpl.wxml" />
+<view class='body-container'>
+  <view class='fixedView'>
+    <view class='cols'>
+      <view class='userInfo-container'>
+        <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}"></image>
+      </view>
+      <view>
+        <text class='userinfo-nickname'>成绩单</text>
+      </view>
+      <view class='title'>正确率:
+        <text style='color:red'>{{rightRate}}</text>
+      </view>
+    </view>
+    <view class='cols'>
+      <view class='firstcol-item'>
+        答对:
+        <text class='cols-text-color'>{{examRight}}</text>
+      </view>
+      <view class='firstcol-item'>
+        答错:
+        <text class='cols-text-color'>{{examError}}</text>
+        <button type='primary' size='mini' class='errorRetry1' bindtap="errorRetry">错题重做</button>
+      </view>
+      <view class='firstcol-item counter'>
+        用时:
+        <text class='colorRed'>{{timeused}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='itemBody'>
+
+    <block wx:for="{{examData}}" wx:key="{{index}}">
+    <template is="exam_result_tpl" data="{{...item,answerShow,userInfo}}" />
+  </block>
+  </view>
+
+</view>

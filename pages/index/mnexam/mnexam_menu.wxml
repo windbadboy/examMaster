@@ -1,0 +1,9 @@
+<!--pages/index/mnexam/mnexam_menu.wxml-->
+<view class='mnexam-container'>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" >
+<view class='mnexam-syl' bindtap='syl'>随意练</view>
+  </picker>
+
+<view class='mnexam-focus'>专项练习</view>
+
+</view>

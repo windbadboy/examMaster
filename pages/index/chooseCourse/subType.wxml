@@ -1,0 +1,5 @@
+<!--pages/index/chooseCourse/subType.wxml-->
+<view class='chooseCourse' wx:for="{{course}}" wx:key="{{index}}">
+<view class='courses' hover-class='selectedcourses' bindtap='chooseNext' data-subTypeId="{{item.subTypeId}}" data-onlyOneBaseType='{{item.onlyOneBaseType}}'>{{item.subTypeName}}</view>
+</view>
+

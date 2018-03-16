@@ -1,0 +1,98 @@
+<template name="exam_result_tpl">
+  <view class='cols'>
+    <view class='firstcol-item'>
+      {{typeName}}
+    </view>
+    <view class='firstcol-item'>
+      网友首次正确率:
+      <text class='cols-text-color'>{{firstRightRate}}%</text>
+    </view>
+    <view class='firstcol-item'>
+      {{modeName}}
+    </view>
+  </view>
+  <view class='body-body'>
+    <view class='body-content'>
+      <block wx:if="{{typeId==1}}">
+        <text>{{tempSn}}. {{firstSentence}}<text class='keyword'>{{keyWord}}</text>{{lastSentence}}</text>
+      </block>
+      <block wx:else>
+        <scroll-view scroll-y style="height: 100px; margin-bottom:10rpx;">
+          <text>{{tempSn}}. {{examBody}}</text>
+        </scroll-view>
+      </block>
+    </view>
+    <view class='body-answer'>
+      <view wx:if="{{typeId!=1 && typeId!=7 && typeId!=8}}">
+        <text>{{tempSn}}. {{answerTitle}}</text>
+      </view>
+      <view wx:if="{{typeId==8}}">
+        <checkbox-group>
+          <label  wx:for="{{examAnswer}}" wx:key="{{index}}" class="check-box">
+            <checkbox value="{{item.answer_letter}}" checked="{{item.checked==1}}" disabled='true'/>
+            <view wx:if="{{item.answerRight}}" class='colorGreen'>
+              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}　　正确答案</view>
+            <view wx:else>
+              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+      <view wx:else>
+        <radio-group class="radio-group" bindchange="radioChange" data-index="{{index}}">
+          <label class="radio" wx:for="{{examAnswer}}" class='radio-answer' wx:key="{{index}}">
+            <radio value="{{item.answerSn}}" checked="{{item.checked==1}}" color='green' wx:if="{{item.answerRight}}" disabled='true' />
+            <radio value="{{item.answerSn}}" checked="{{item.checked==1}}" color="red" wx:else disabled='true' />
+            <view wx:if="{{item.answerRight}}" class='colorGreen'>
+              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}　　正确答案</view>
+            <view wx:else>
+              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}</view>
+          </label>
+        </radio-group>      
+      </view>
+    </view>
+  </view>
+  <view class='body-analysis'>
+    <view>正确答案:
+      <text class='keyword'>{{correctAnswer}}</text>.　　{{answerAnalysisContent}}
+    </view>
+  </view>
+  <view class='body-analysis'>
+    <button type='primary' size='mini' class='comment' bindtap="comment" data-index="{{tempSn-1}}">查看注释</button>
+    <view hidden="{{answerButtonShow==0}}" class='hidden-container'>
+      <view class='hidden-userDid'>
+        <view wx:if="{{didDate!=null}}">
+          <text>你最后于{{didDate}}做过该题，<text wx:if="{{userAnswer==''}}">没有填写答案。</text>
+          <text wx:else>你的选择是:{{userAnswer}}</text></text>
+        </view>
+        <view wx:else>之前未做过该题。</view>
+      </view>
+      <view class='hidden-userComment'>
+        <view class='hidden-box' wx:for="{{examComment}}" wx:key="{{index}}">
+          <view class='hidden-userInfo'>
+            <view class="hidden-userInfo-left">
+              <image src="{{item.avatarUrl}}" class="userinfo-avatar"></image>
+              <text style="color:#aaa;font-size:16px">{{item.nickName}}</text>
+            </view>
+
+          </view>
+          <view class='hidden-comment'>
+            <text>{{item.commentContent}}</text>
+          </view>
+        </view>
+        <form bindsubmit='bindFormSubmit' data-examSn="{{examSn}}" data-tempSn="{{tempSn-1}}">
+          <view class='hidden-writenote'>
+
+            <view class='hidden-comment-text'>
+              <textarea placeholder="写点什么" auto-height name="commentContent" focus='true' value='{{userComment}}' />
+            </view>
+            <view class='hidden-comment-submit'>
+              <button size='mini' form-type='submit' type='primary'>写注释</button>
+            </view>
+
+
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</template>
