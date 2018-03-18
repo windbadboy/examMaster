@@ -1,9 +1,10 @@
 <!--index.wxml-->
 <view class="container">
   <view class='userInfo-container'>
-    <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}" wx:if="{{userInfo.avatarUrl!=''}}"></image>
-     <image class='userinfo-avatar' src="../image/visitor.png" wx:else></image>   
-    <text class='userinfo-nickname'>{{userInfo.nickName}}</text>
+    <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}" wx:if="{{userInfo.avatarUrl!=null}}"></image>
+    <image class='userinfo-avatar' src="../image/visitor.png" wx:else bindtap='reLogin'></image>
+    <text class='userinfo-nickname' wx:if="{{userInfo.avatarUrl!=null}}">{{userInfo.nickName}}</text>
+    <text class='userinfo-nickname' wx:else>请点击图标登录</text>
   </view>
 
   <view class='body-container'>
@@ -19,5 +20,10 @@
       <view class='choose-course otherCourse' style="background-color:{{bgcolor_zt}}" bindtap='realitem'>历年真题</view>
       <view class='choose-course otherCourse' style="background-color:{{bgcolor_other}}" bindtap='iSubimit'>我来出题</view>
     </view>
+  </view>
+  <view>
+       <contact-button type="default-dark" size="30" session-from="weapp" class="guest-button">
+    test</contact-button>
+<button open-type="contact" session-from="weapp">找客服</button>
   </view>
 </view>

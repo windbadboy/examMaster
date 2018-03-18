@@ -20,7 +20,7 @@ function httpRequire(url, callback) {
     url: url,
     success: function (res) {
       wx.hideNavigationBarLoading();
-//      console.log(res)
+      //      console.log(res)
       callback(res)
     },
     fail: res => {
@@ -36,6 +36,87 @@ function getLoginInfo(callback, url) {
       // 发送 res.code 到后台换取 openId, sessionKey, unionId
       console.log('login successfully.')
       code = res.code
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            console.log('I can use userInfo.')
+            wx.getUserInfo({
+              success: res => {
+                console.log('get userinfo successfully')
+                //              console.log(res)
+                var encryptedData = res.encryptedData
+                var iv = res.iv
+                wx.setStorageSync('userInfo', res.userInfo)
+                //         this.globalData.userInfo = res.userInfo
+
+                myLogin(code, encryptedData, iv, callback, url)
+              },
+              fail: res => {
+                console.log(res)
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '用户信息获取失败',
+              icon: 'success',
+              duration: 2000
+            })
+            wx.setStorageSync('userId', 'null')
+            wx.authorize({
+              scope: 'scope.userInfo',
+              success: res => {
+                wx.getUserInfo({
+                  success: res => {
+                    console.log('get userinfo successfully')
+                    //              console.log(res)
+                    var encryptedData = res.encryptedData
+                    var iv = res.iv
+                    wx.setStorageSync('userInfo', res.userInfo)
+                    //         this.globalData.userInfo = res.userInfo
+
+                    myLogin(code, encryptedData, iv, callback, url)
+                  },
+                  fail: res => {
+                    
+                  }
+                })
+
+              },
+              fail: res => {
+                wx.openSetting({
+                  success: function (res) {
+                    
+                    if (res.authSetting['scope.userInfo']) {
+                      wx.getUserInfo({
+                        success: res => {
+                          console.log('get userinfo successfully')
+                          //              console.log(res)
+                          var encryptedData = res.encryptedData
+                          var iv = res.iv
+                          wx.setStorageSync('userInfo', res.userInfo)
+                          //         this.globalData.userInfo = res.userInfo
+
+                          myLogin(code, encryptedData, iv, callback, url)
+                        },
+                        fail: res => {
+
+                        }
+                      })
+                    }
+                  },
+                  fail: res => {
+
+                  }
+                })
+              }
+            })
+
+          }
+        },
+        fail: res => {
+          console.log(res)
+        }
+      })
     },
     fail: function (res) {
       wx.showToast({
@@ -47,46 +128,7 @@ function getLoginInfo(callback, url) {
     }
   })
   // 获取用户信息
-  wx.getSetting({
-    success: res => {
-      if (res.authSetting['scope.userInfo']) {
-        console.log('I can use userInfo.')
-        wx.getUserInfo({
-          success: res => {
-            console.log('get userinfo successfully')
-            //              console.log(res)
-            var encryptedData = res.encryptedData
-            var iv = res.iv
-            wx.setStorageSync('userInfo', res.userInfo)
-            //         this.globalData.userInfo = res.userInfo
 
-            myLogin(code, encryptedData, iv, callback, url)
-          },
-          fail: res => {
-            console.log(res)
-          }
-        })
-      } else {
-        wx.showToast({
-          title: '用户信息获取失败',
-          icon: 'success',
-          duration: 2000
-        })
-        wx.setStorageSync('userId', 'null')
-        wx.openSetting({
-          success: function (res) {
-
-            if (res.authSetting['scope.userInfo']) {
-              console.log('获取用户数据成功。')
-            }
-          }
-        })
-      }
-    },
-    fail: res => {
-      console.log(res)
-    }
-  })
 
 }
 
@@ -104,17 +146,18 @@ function myLogin(code, encryptedData, iv, callback, url) {
     },
     success: res => {
       if (res.data) {
-//        console.log(res)
+        //        console.log(res)
         if (res.data == "-41001") {
           wx.showModal({
             title: '错误',
             content: '用户信息获取异常',
-            showCancel:'false',
+            showCancel: 'false',
 
           })
 
         } else {
           console.log('set userData successed.')
+//          console.log(res.data)
           wx.setStorageSync('userId', res.data[0].userId)
           wx.setStorageSync('session_key', res.data[0].session_key)
           callback(res.data[0])

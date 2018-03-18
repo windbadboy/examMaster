@@ -31,6 +31,9 @@ Page({
       title: '暂未开放',
     })   
   },
+  reLogin : function (res) {
+    util.getLoginInfo(this.getLogin, app.globalData.url)
+  },
   getLogin: function (res) {
     //登录成功后返回session_key(自有)和userId
     //根据是否选课
@@ -68,11 +71,13 @@ Page({
         //  console.log(!(typeof (res.data[0]) == 'undefined'))
         if (!(typeof (res.data[0]) == 'undefined')) {
           wx.setStorageSync('currentCourse', res.data[0].currentCourse)
-          wx.setStorageSync('categoryId', res.data[0].categoryId)         
+          wx.setStorageSync('categoryId', res.data[0].categoryId)      
+
           app.globalData.categoryId = res.data[0].categoryId
           //  console.log('111:'+res.data[0].currentCourse)
           this.setData({
-            courseInfo: '己选:' + res.data[0].baseTypeName
+            courseInfo: '己选:' + res.data[0].baseTypeName,
+            bgcolor_syl: '#0078d7',
           })
         }
         else {
