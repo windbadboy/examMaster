@@ -19,11 +19,7 @@
 
       <view class='choose-course otherCourse' style="background-color:{{bgcolor_zt}}" bindtap='realitem'>历年真题</view>
       <view class='choose-course otherCourse' style="background-color:{{bgcolor_other}}" bindtap='iSubimit'>我来出题</view>
+      <view class='choose-course otherCourse' style="background-color:{{bgcolor_iPay}}" bindtap='iPay'>购买VIP</view>      
     </view>
-  </view>
-  <view>
-       <contact-button type="default-dark" size="30" session-from="weapp" class="guest-button">
-    test</contact-button>
-<button open-type="contact" session-from="weapp">找客服</button>
   </view>
 </view>

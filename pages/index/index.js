@@ -13,7 +13,8 @@ Page({
     bgcolor_syl: '',
     bgcolor_zt: '',
     bgcolor_other: '',
-    courseInfo: ''
+    courseInfo: '',
+    bgcolor_iPay:'',
   },
   //事件处理函数
   bindViewTap: function () {
@@ -49,7 +50,8 @@ Page({
       this.setData({
         bgcolor_syl: '#0078d7',
         bgcolor_zt: '#eee',
-        bgcolor_other: '#eee'
+        bgcolor_other: '#eee',
+        bgcolor_iPay: '#0078d7',
 
       })
     }
@@ -151,6 +153,47 @@ Page({
     wx.navigateTo({
       url: 'chooseCourse/chooseCourse?course=' + JSON.stringify(res.data),
     })
+  },
+  iPay: function (res) {
+    if (app.globalData.userId != '' || app.globalData.userId != null) {
+      wx.checkSession({
+        success: res => {
+          var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId
+          util.httpRequire(url, this.iPayReturn)
+        },
+        fail: res => {
+          wx.showToast({
+            title: '请先登录',
+          })
+        }
+      })
+    }
+   
+  },
+  iPayReturn: function(res) {
+    console.log(res);
+    if(res.data.state==1) {
+      wx.requestPayment({
+        timeStamp: res.data.timeStamp,
+        nonceStr: res.data.nonceStr,
+        package: res.data.package,
+        signType: res.data.signType,
+        paySign: res.data.paySign,
+        success: res=> {
+          //支付成功
+          console.log(res);
+        },
+        fail: res=> {
+          console.log(res)
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '支付异常',
+        content: res.data.RETURN_MSG,
+      })
+    }
+
   }
 
 })
