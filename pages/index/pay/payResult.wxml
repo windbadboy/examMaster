@@ -1,0 +1,15 @@
+<!--pages/index/pay/payResult.wxml-->
+<view class='pay-container'>
+<view class='pay-title' wx:if="{{payResult.state=='SUCCESS'}}">支付成功</view>
+<view class='pay-title' wx:else>支付失败</view>
+<view class='pay-order'>订单号:{{payResult.orderNo}}</view>
+<view class='pay-order'>商品名:终身VIP</view>
+<view class='pay-productContent'>
+商品内容:xxx
+
+</view>
+<view class='pay-order'>支付费用: ¥{{payResult.total_fee}} </view>
+<view class='pay-confirm'>
+<button type='primary' size='mini' bindtap='back'>返回</button>
+</view>
+</view>

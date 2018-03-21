@@ -158,8 +158,18 @@ Page({
     if (app.globalData.userId != '' || app.globalData.userId != null) {
       wx.checkSession({
         success: res => {
-          var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId
-          util.httpRequire(url, this.iPayReturn)
+
+          wx.showModal({
+            title: '购买vip',
+            content: '0.01元',
+            success: res=> {
+              if(res.confirm) {
+                var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId + "&fee=1&mybody=1"
+                util.httpRequire(url, this.iPayReturn)
+              }
+            }
+          })
+
         },
         fail: res => {
           wx.showToast({
@@ -171,28 +181,33 @@ Page({
    
   },
   iPayReturn: function(res) {
-    console.log(res);
-    if(res.data.state==1) {
-      wx.requestPayment({
-        timeStamp: res.data.timeStamp,
-        nonceStr: res.data.nonceStr,
-        package: res.data.package,
-        signType: res.data.signType,
-        paySign: res.data.paySign,
-        success: res=> {
-          //支付成功
-          console.log(res);
-        },
-        fail: res=> {
-          console.log(res)
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '支付异常',
-        content: res.data.RETURN_MSG,
-      })
-    }
+//    console.log(res.data);
+    var tempStr = JSON.stringify(res.data)
+    tempStr = tempStr.replace(/=/g,"niceequal")
+    wx.navigateTo({
+      url: 'pay/pay?payInfo=' + tempStr,
+    })
+    // if(res.data.state==1) {
+    //   wx.requestPayment({
+    //     timeStamp: res.data.timeStamp,
+    //     nonceStr: res.data.nonceStr,
+    //     package: res.data.package,
+    //     signType: res.data.signType,
+    //     paySign: res.data.paySign,
+    //     success: res=> {
+    //       //支付成功
+    //       console.log(res);
+    //     },
+    //     fail: res=> {
+    //       console.log(res)
+    //     }
+    //   })
+    // } else {
+    //   wx.showModal({
+    //     title: '支付异常',
+    //     content: res.data.RETURN_MSG,
+    //   })
+    // }
 
   }
 

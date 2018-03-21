@@ -275,7 +275,9 @@ Page({
             temp2 = temp2.replace(/\?/g, "？");
             temp2 = temp2.replace(/'/g, "\\\\'");
             temp2 = temp2.replace(/<br>/g, "\\n");
-            //            console.log(temp2)
+            temp2 = temp2.replace(/\+/g,"＋");
+            temp2 = temp2.replace(/\=/g,"＝");
+        //                console.log(temp2)
             wx.redirectTo({
               url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n,
             })
@@ -297,6 +299,8 @@ Page({
             temp2 = temp2.replace(/\?/g, "？");
             temp2 = temp2.replace(/'/g, "\\\\'");
             temp2 = temp2.replace(/<br>/g, "\\n");
+            temp2 = temp2.replace(/\+/g, "＋");
+            temp2 = temp2.replace(/\=/g, "＝");
             //            console.log(temp2)            
             wx.redirectTo({
               url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n,

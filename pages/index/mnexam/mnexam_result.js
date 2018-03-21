@@ -35,6 +35,9 @@ Page({
 //  console.log(temp1)
 
    //处理错题重做
+//   console.log("\r\n\r\n in result:")
+//   console.log(temp1)
+//    console.log(JSON.parse(temp1))
     var tempData = JSON.parse(temp1)
 //    console.log(JSON.parse(temp1))
     this.data.tempMiddle = JSON.parse(temp1)
