@@ -26,7 +26,7 @@
       <view wx:if="{{typeId!=1 && typeId!=7 && typeId!=8}}">
         <text>{{tempSn}}. {{answerTitle}}</text>
       </view>
-      <view wx:if="{{typeId==8}}">
+      <view wx:if="{{typeId==8||typeId==9}}">
         <checkbox-group>
           <label  wx:for="{{examAnswer}}" wx:key="{{index}}" class="check-box">
             <checkbox value="{{item.answer_letter}}" checked="{{item.checked==1}}" disabled='true'/>

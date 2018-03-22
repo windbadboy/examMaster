@@ -37,7 +37,7 @@
       <view wx:if="{{examSingleData.typeId!=1 && examSingleData.typeId!=7 && examSingleData.typeId!=8}}">
         <text>{{examSingleData.tempSn}}. {{examSingleData.answerTitle}}</text>
       </view>
-      <view wx:if="{{examSingleData.typeId==8}}">
+      <view wx:if="{{examSingleData.typeId==8||examSingleData.typeId==9}}">
         <checkbox-group bindchange="checkboxChange">
           <label  wx:for="{{examSingleData.examAnswer}}" wx:key="{{index}}" class="check-box">
             <checkbox value="{{item.answer_letter}}" checked="{{item.checked==1}}" />
