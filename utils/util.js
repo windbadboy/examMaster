@@ -157,7 +157,7 @@ function myLogin(code, encryptedData, iv, callback, url) {
 
         } else {
           console.log('set userData successed.')
-//          console.log(res.data)
+ //         console.log(res.data)
           wx.setStorageSync('userId', res.data[0].userId)
           wx.setStorageSync('session_key', res.data[0].session_key)
           callback(res.data[0])

@@ -19,7 +19,7 @@ Page({
   onLoad: function (options) {
     //    console.log(options.course)
     var temp = JSON.parse(options.course)
-    console.log(temp)
+//    console.log(temp)
     this.setData({
       course: temp
     })
