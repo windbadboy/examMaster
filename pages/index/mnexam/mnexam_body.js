@@ -5,6 +5,10 @@ var pause = false
 var m = 0
 var n = 0
 var examData = {}
+var time = 0;
+var touchDot = 0;//触摸时的原点
+var interval = "";
+var flag_hd = true;
 
 function countdown(that) {
   //console.log('status:'+pause)
@@ -58,6 +62,7 @@ Page({
     examPrevPage: 1,
     examdid: 0,
     examleft: 0,
+    examTitle:'',
 
 
 
@@ -133,6 +138,7 @@ Page({
 
     this.setData({
       userInfo: app.globalData.userInfo,
+      examTitle: options.examTitle,
     })
     pause = false
     //计时器开始计时
@@ -152,8 +158,15 @@ Page({
       //获取题库
       wx.checkSession({
         success: res => {
-          var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=getExam&courseId=' + wx.getStorageSync('currentCourse') + '&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key + '&itemNumber=' + options.itemNumber + '&categoryId=' + app.globalData.categoryId
-          //        console.log(url)
+//          console.log(options)
+          var url=''
+          if(options.examType==2) {
+            url = app.globalData.url + 'wxlogin/getuserInfo.php?which=getRealExam&chapterId=' + options.chapterId + '&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key
+          } else if (options.examType == 1) {
+            url = app.globalData.url + 'wxlogin/getuserInfo.php?which=getExam&courseId=' + wx.getStorageSync('currentCourse') + '&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key + '&itemNumber=' + options.itemNumber + '&categoryId=' + app.globalData.categoryId
+          }
+
+ //         console.log(url)
           wx.showLoading({
             title: '正在加载数据',
             mask: true,
@@ -179,8 +192,17 @@ Page({
   },
   //获取题库成功
   callback: function (res) {
-//    console.log(res)
+
     //获取单前页
+
+//  
+    for(var i=0;i<res.data.length;i++) {
+      if (res.data[i].examBodyImg.length > 0) {
+        var tempImgArr = res.data[i].examBodyImg.split(";")
+        res.data[i].examBodyImg =tempImgArr
+      }
+    }
+    console.log(res)
     var tempData2 = res.data[this.data.examCurrentPage]
     //  temp2 = temp2.replace(/<br>/g, "\\n");
     //   tempData2.examBody = tempData2.examBody.replace(/<br>/g, "\\n")
@@ -279,7 +301,7 @@ Page({
             temp2 = temp2.replace(/\=/g,"＝");
         //                console.log(temp2)
             wx.redirectTo({
-              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n,
+              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n +'&examTitle='+this.data.examTitle,
             })
           }
         }
@@ -343,6 +365,37 @@ Page({
         examSingleData: this.data.examData[this.data.examCurrentPage]
       })
     }
+  },
+
+  touchStart: function(e) {
+    touchDot = e.touches[0].pageX; // 获取触摸时的原点
+//    console.log("touched")
+    // 使用js计时器记录时间    
+    interval = setInterval(function () {
+      time++;
+    }, 100);
+  },
+
+  touchEnd:function(e) {
+
+    var touchMove = e.changedTouches[0].pageX;
+    console.log("touchDot:"+touchDot)
+    console.log("touchMove:"+touchMove)
+    console.log("time:"+time)
+    if (touchMove - touchDot <= -40 && time < 10) {
+      flag_hd = false;
+      //执行切换页面的方法
+      console.log("向右滑动");
+
+    }
+    // 向右滑动   
+    if (touchMove - touchDot >= 40 && time < 10) {
+      flag_hd = false;
+      //执行切换页面的方法
+      console.log("向左滑动");
+
+    }
+    time=0
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

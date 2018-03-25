@@ -15,6 +15,10 @@ Page({
     bgcolor_other: '',
     courseInfo: '',
     bgcolor_iPay:'',
+    mnNum:0,
+    realNum:0,
+    vipTitle:'购买vip',
+    vip:0,
   },
   //事件处理函数
   bindViewTap: function () {
@@ -23,9 +27,29 @@ Page({
     })
   },
   realitem: function () {
-    wx.showToast({
-      title: '暂未开放',
-    })
+    if (app.globalData.userInfo && app.globalData.userId) {
+      if (app.globalData.vip == 1) {
+        wx.navigateTo({
+          url: 'mnexam/mnexam_menu?type=2',
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      } else {
+        wx.showToast({
+          title: '请购买vip',
+        })
+
+      }
+
+    } else {
+      wx.showToast({
+        title: '请先登录',
+      })
+    }
+
+
+
   },
   iSubimit : function() {
     wx.showToast({
@@ -38,7 +62,23 @@ Page({
   getLogin: function (res) {
     //登录成功后返回session_key(自有)和userId
     //根据是否选课
+    app.globalData.vip = res.vip
     wx.hideNavigationBarLoading()
+    this.setData({
+      mnNum : res.mnNum,
+      realNum : res.realNum,
+    })
+    if (app.globalData.vip == 1) {
+      this.setData({
+        bgcolor_iPay: '#eee',
+        vipTitle:'已购买VIP',
+        vip:res.vip
+      })
+    } else {
+      this.setData({
+        bgcolor_iPay: '#0078d7'
+      })      
+    }
     if (!wx.getStorageSync('currentCourse')) {
       this.setData({
         bgcolor_syl: '#eee',
@@ -49,14 +89,15 @@ Page({
     } else {
       this.setData({
         bgcolor_syl: '#0078d7',
-        bgcolor_zt: '#eee',
+        bgcolor_zt: '#0078d7',
         bgcolor_other: '#eee',
-        bgcolor_iPay: '#0078d7',
+
 
       })
     }
     app.globalData.userInfo = wx.getStorageSync('userInfo')
     app.globalData.userId = wx.getStorageSync('userId')
+
 
     this.setData({
       bgcolor: '#0078d7'
@@ -128,7 +169,7 @@ Page({
   mnexam: function () {
     if (app.globalData.userInfo && app.globalData.userId) {
       wx.navigateTo({
-        url: 'mnexam/mnexam_menu',
+        url: 'mnexam/mnexam_menu?type=1',
         success: function (res) { },
         fail: function (res) { },
         complete: function (res) { },
@@ -156,27 +197,34 @@ Page({
   },
   iPay: function (res) {
     if (app.globalData.userId != '' || app.globalData.userId != null) {
-      wx.checkSession({
-        success: res => {
+      if(app.globalData.vip!=1) {
+        wx.checkSession({
+          success: res => {
 
-          wx.showModal({
-            title: '购买vip',
-            content: '0.01元',
-            success: res=> {
-              if(res.confirm) {
-                var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId + "&fee=1&mybody=1"
-                util.httpRequire(url, this.iPayReturn)
+            wx.showModal({
+              title: '购买终身vip',
+              content: '¥ 30元',
+              success: res => {
+                if (res.confirm) {
+                  var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId + "&fee=3000&mybody=1"
+                  util.httpRequire(url, this.iPayReturn)
+                }
               }
-            }
-          })
+            })
 
-        },
-        fail: res => {
-          wx.showToast({
-            title: '请先登录',
-          })
-        }
-      })
+          },
+          fail: res => {
+            wx.showToast({
+              title: '请先登录',
+            })
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '已获得vip资格',
+        })        
+      }
+
     }
    
   },

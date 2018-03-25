@@ -30,6 +30,7 @@ App({
     url:'https://www.badteacher.club/',
     session_key: '',
     categoryId : '',
+    vip:0,
   },
 
   callback: function (res) {

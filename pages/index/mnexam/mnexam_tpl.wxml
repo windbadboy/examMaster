@@ -16,7 +16,7 @@
       <block wx:if="{{examSingleData.typeId==1}}">
         <text>{{examSingleData.tempSn}}. {{examSingleData.firstSentence}}<text class='keyword'>{{examSingleData.keyWord}}</text>{{examSingleData.lastSentence}}</text>
       </block>
-      <block wx:elif="{{examSingleData.typeId==7 || examSingleData.typeId==8}}">
+      <block wx:elif="{{examSingleData.typeId==7 || examSingleData.typeId==8 || examSingleData.typeId==12}}">
         <text>{{examSingleData.tempSn}}. {{examSingleData.examBody}}</text>
 
 
@@ -26,20 +26,20 @@
           <text>{{examSingleData.examBody}}</text>
         </scroll-view>
       </block>
-      <view class='examBodyImg' wx:if="{{examSingleData.examBodyImg!=''}}">
-        <image src="http://www.badteacher.club/{{examSingleData.examBodyImg}}" style="width:350px;height:140px"></image>
+      <view class='examBodyImg' wx:if="{{examSingleData.examBodyImg.length>0}}" wx:for="{{examSingleData.examBodyImg}}" wx:key="{{index}}">
+        <image src="http://www.badteacher.club/{{item}}" style='max-width: 100%;max-height: 100%;'></image>
       </view>
       <view class='examBodyOther' wx:if="{{examSingleData.examBodyOther!=''}}">
         <text>{{examSingleData.examBodyOther}}</text>
       </view>
     </view>
     <view class='body-answer'>
-      <view wx:if="{{examSingleData.typeId!=1 && examSingleData.typeId!=7 && examSingleData.typeId!=8}}">
+      <view wx:if="{{examSingleData.typeId!=1 && examSingleData.typeId!=7 && examSingleData.typeId!=8 &&examSingleData.typeId!=12}}">
         <text>{{examSingleData.tempSn}}. {{examSingleData.answerTitle}}</text>
       </view>
       <view wx:if="{{examSingleData.typeId==8||examSingleData.typeId==9}}">
         <checkbox-group bindchange="checkboxChange">
-          <label  wx:for="{{examSingleData.examAnswer}}" wx:key="{{index}}" class="check-box">
+          <label wx:for="{{examSingleData.examAnswer}}" wx:key="{{index}}" class="check-box">
             <checkbox value="{{item.answer_letter}}" checked="{{item.checked==1}}" />
 
             <text class='answer_letter'>{{item.answer_letter}}. {{item.answerContent}}</text>

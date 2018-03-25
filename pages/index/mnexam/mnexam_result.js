@@ -21,6 +21,7 @@ Page({
     commentHidden:true,
     userComment:'',
     itemNum:0,
+    examTitle:'',
   },
 
   /**
@@ -30,7 +31,7 @@ Page({
   //  console.log(options.examdata.length)
 
     var temp1 = options.examData
-
+    this.data.examTitle = options.examTitle
 //  console.log('inResult afterCatch:')
 //  console.log(temp1)
 
@@ -235,7 +236,7 @@ Page({
 
     }
     wx.redirectTo({
-      url: 'mnexam_body?num=' + this.data.examError + '&retry=1&wrongData=' + JSON.stringify(this.data.wrongData) + '&examPage=0',
+      url: 'mnexam_body?num=' + this.data.examError + '&retry=1&wrongData=' + JSON.stringify(this.data.wrongData) + '&examPage=0&examTitle=' + this.data.examTitle,
     })
   } else {
     wx.showToast({

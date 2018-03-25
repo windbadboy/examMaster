@@ -1,9 +1,25 @@
 <!--pages/index/mnexam/mnexam_menu.wxml-->
 <view class='mnexam-container'>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" >
-<view class='mnexam-syl' bindtap='syl'>随意练</view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" wx:if="{{itemType==1}}">
+    <view class='mnexam-syl' bindtap='syl'>随意练</view>
   </picker>
-
-<view class='mnexam-focus'>专项练习</view>
-
+  <view class='mnexam-focus' wx:if="{{itemType==1}}">专项练习</view>
+  <view wx:if="{{itemType==2}}" wx:for="{{vipCourse}}" wx:key="{{index}}">
+    <view class='realitem' data-chapterId="{{item.chapterId}}" bindtap='doexam'>
+      <view class='realitem-upper'>
+        <view class='realitem-upper-left'>
+          <image src='../../image/new.png'></image>
+          <text>{{item.belongsName}}</text>
+        </view>
+        <view class='realitem-upper-right'>
+          <image src='../../image/edit.png'></image>
+        </view>
+      </view>
+      <view class='realitem-lower'>
+        <text>2人做过</text>
+        <text>网友平均分:61</text>
+        <text>题目数:130</text>
+      </view>
+    </view>
+  </view>
 </view>

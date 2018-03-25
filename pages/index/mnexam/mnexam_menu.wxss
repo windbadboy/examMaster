@@ -29,3 +29,57 @@
 .pickercss {
   font-size: 24px;
 }
+
+.realitem {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.realitem-upper {
+  display: flex;
+
+
+  
+}
+
+.realitem-upper-left {
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.realitem-upper-left image {
+  height:24px;
+  width:48px;
+}
+
+.realitem-upper-left text {
+  color: #999;
+  font-size: 14px;
+  margin-left: 10px;
+
+}
+.realitem-upper-right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.realitem-upper-right image {
+  height:24px;
+  width:32px;  
+}
+
+.realitem-lower {
+    display: flex;
+  color: #ccc;
+  font-size: 12px;    
+  width: 60%;
+  justify-content: space-between;
+  padding-top: 10px;
+}
