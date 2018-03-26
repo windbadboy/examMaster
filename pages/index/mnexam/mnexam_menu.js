@@ -52,9 +52,17 @@ Page({
          wx.request({
            url: app.globalData.url + 'wxlogin/getuserInfo.php?which=getVipCourse&currentCourse=' + wx.getStorageSync('currentCourse') + '&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key,
            success: res=> {
-//            console.log(res.data)
+ //           console.log(res.data)
+           // var nowDate = new Date();
+            
+           // var addDate=res.data.data[0].addDate;
+          //  addDate = addDate.replace(/-/g,"/")
+          //  addDate = Date.parse(addDate)
+           // console.log(Math.ceil((nowDate - addDate) / (24 * 60 * 60 * 1000)))
+
             //state为1代表有数据
              if (res.data.state==1) {
+
                 this.setData({
                   vipCourse: res.data.data
                 })

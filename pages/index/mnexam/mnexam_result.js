@@ -53,7 +53,7 @@ Page({
       //console.log(str)
       if (tempData[i].correctAnswer == tempData[i].userAnswer) {
         tempRight++
-        this.data.score += tempData[i].score
+        this.data.score = parseFloat(this.data.score) + parseFloat(tempData[i].score)
         str += '"firstRight":' + '"1"}'
       } else {
         str += '"firstRight":' + '"0"}'
@@ -107,17 +107,14 @@ Page({
     wx.checkSession({
       success: res => {
         var score = this.data.score
-        var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=uploadExam&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key + "&chapterId=" + options.chapterId
+        var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=uploadExam&userId=' + app.globalData.userId + '&session_key=' + app.globalData.session_key + "&chapterId=" + options.chapterId + "&score=" + this.data.score
         wx.request({
           url: url,
           method: 'POST',
           header: {
             "content-type": "application/json"
           },
-          data: {
-            uploadData,
-            score,
-            },
+          data: uploadData,
           success: res => {
             //            console.log(res)
           }

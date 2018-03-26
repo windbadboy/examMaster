@@ -203,7 +203,7 @@ Page({
         res.data[i].examBodyImg =tempImgArr
       }
     }
-    console.log(res)
+ //   console.log(res)
     var tempData2 = res.data[this.data.examCurrentPage]
     //  temp2 = temp2.replace(/<br>/g, "\\n");
     //   tempData2.examBody = tempData2.examBody.replace(/<br>/g, "\\n")

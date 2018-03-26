@@ -8,7 +8,7 @@
     <view class='realitem' data-chapterId="{{item.chapterId}}" bindtap='doexam'>
       <view class='realitem-upper'>
         <view class='realitem-upper-left'>
-          <image src='../../image/new.png'></image>
+          <image src='../../image/new.png' wx:if="{{item.days<30}}"></image>
           <text>{{item.belongsName}}</text>
         </view>
         <view class='realitem-upper-right'>
@@ -16,9 +16,9 @@
         </view>
       </view>
       <view class='realitem-lower'>
-        <text>2人做过</text>
-        <text>网友平均分:61</text>
-        <text>题目数:130</text>
+        <text>{{item.examNum}}人做过</text>
+        <text>网友平均分:{{item.examAvgScore}}</text>
+        <text>题目数:{{item.examItemNum}}</text>
       </view>
     </view>
   </view>
