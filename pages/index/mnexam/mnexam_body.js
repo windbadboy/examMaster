@@ -63,6 +63,7 @@ Page({
     examdid: 0,
     examleft: 0,
     examTitle:'',
+    chapterId:0,
 
 
 
@@ -134,7 +135,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.data.chapterId = options.chapterId
 
     this.setData({
       userInfo: app.globalData.userInfo,
@@ -301,7 +302,7 @@ Page({
             temp2 = temp2.replace(/\=/g,"＝");
         //                console.log(temp2)
             wx.redirectTo({
-              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n +'&examTitle='+this.data.examTitle,
+              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n + '&examTitle=' + this.data.examTitle + '&chapterId=' + this.data.chapterId,
             })
           }
         }
@@ -325,7 +326,7 @@ Page({
             temp2 = temp2.replace(/\=/g, "＝");
             //            console.log(temp2)            
             wx.redirectTo({
-              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n,
+              url: 'mnexam_result?examData=' + temp2 + '&m=' + m + '&s=' + n + '&examTitle=' + this.data.examTitle + '&chapterId=' + this.data.chapterId,
             })
           }
         }
@@ -371,30 +372,55 @@ Page({
     touchDot = e.touches[0].pageX; // 获取触摸时的原点
 //    console.log("touched")
     // 使用js计时器记录时间    
-    interval = setInterval(function () {
-      time++;
-    }, 100);
+    time = Date.parse(new Date())
   },
 
   touchEnd:function(e) {
 
     var touchMove = e.changedTouches[0].pageX;
-    console.log("touchDot:"+touchDot)
-    console.log("touchMove:"+touchMove)
-    console.log("time:"+time)
-    if (touchMove - touchDot <= -40 && time < 10) {
+//    console.log("touchDot:"+touchDot)
+//    console.log("touchMove:"+touchMove)
+//    console.log("time:"+time)
+    if (touchMove - touchDot <= -80 && Date.parse(new Date())-time<160) {
       flag_hd = false;
       //执行切换页面的方法
-      console.log("向右滑动");
+//      console.log("向右滑动");
+      if (this.data.examCurrentPage == this.data.examData.length - 1) {
+        wx.showToast({
+          title: '最后1题.',
+        })
+      }
+      else {
+        this.setData({
+          examCurrentPage: parseInt(this.data.examCurrentPage) + 1,
+        })
 
+        this.setData({
+          examSingleData: this.data.examData[this.data.examCurrentPage]
+        })
+      }
     }
     // 向右滑动   
-    if (touchMove - touchDot >= 40 && time < 10) {
+    if (touchMove - touchDot >= 80 && Date.parse(new Date()) - time < 160) {
       flag_hd = false;
       //执行切换页面的方法
-      console.log("向左滑动");
+//      console.log("向左滑动");
+      if (this.data.examCurrentPage == 0) {
+        wx.showToast({
+          title: '第1题.',
+        })
+      } else {
+        //     console.log(res)
+        this.setData({
+          examCurrentPage: parseInt(this.data.examCurrentPage) - 1
+        })
 
+        this.setData({
+          examSingleData: this.data.examData[this.data.examCurrentPage]
+        })
+      }
     }
+  //  console.log(time)
     time=0
   },
   /**

@@ -30,7 +30,6 @@
     </view>
   </view>
   <view class='itemBody'>
-
     <block wx:for="{{examData}}" wx:key="{{index}}">
     <template is="exam_result_tpl" data="{{...item,answerShow,userInfo}}" />
   </block>

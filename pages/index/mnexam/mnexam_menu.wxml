@@ -3,7 +3,7 @@
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" wx:if="{{itemType==1}}">
     <view class='mnexam-syl' bindtap='syl'>随意练</view>
   </picker>
-  <view class='mnexam-focus' wx:if="{{itemType==1}}">专项练习</view>
+
   <view wx:if="{{itemType==2}}" wx:for="{{vipCourse}}" wx:key="{{index}}">
     <view class='realitem' data-chapterId="{{item.chapterId}}" bindtap='doexam'>
       <view class='realitem-upper'>

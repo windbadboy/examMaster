@@ -2,13 +2,15 @@
 <view class='pay-container'>
 <view class='pay-title'>确认订单</view>
 <view class='pay-order'>订单号:{{payInfo.out_trade_no}}</view>
-<view class='pay-order'>商品名:终身VIP</view>
-<view class='pay-productContent'>
-商品内容:xxx
-
+<view class='pay-order'>商品名:VIP</view>
+<view class='pay-order'>
+商品内容:1、在本程序运营期间内无限制使用所有题库;2、VIP尊享标识;
 </view>
-<view class='pay-order'>购买费用: ¥{{payInfo.fee/100}}元</view>
-<view class='pay-confirm'>
+<view class='pay-order'>
+注:开通VIP后您即开始享受本程序提供的服务，支付后不支持退款，请注意。
+</view>
+<view class='pay-order'>购买费用: ¥<view class='fee'>{{payInfo.fee/100}}元</view></view>
+<view  class='pay-order'>
 <button type='primary' size='mini' bindtap='pay'>购买</button>
 </view>
 </view>

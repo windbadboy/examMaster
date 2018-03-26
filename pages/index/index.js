@@ -206,7 +206,7 @@ Page({
               content: '¥ 30元',
               success: res => {
                 if (res.confirm) {
-                  var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId + "&fee=3000&mybody=1"
+                  var url = app.globalData.url + 'wxlogin/getuserInfo.php?which=iPay' + '&session_key=' + app.globalData.session_key + '&userId=' + app.globalData.userId + "&fee=1&mybody=1"
                   util.httpRequire(url, this.iPayReturn)
                 }
               }
