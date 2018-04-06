@@ -17,7 +17,7 @@
         <text>{{tempSn}}. {{firstSentence}}<text class='keyword'>{{keyWord}}</text>{{lastSentence}}</text>
       </block>
       <block wx:else>
-        <scroll-view scroll-y style="height:auto; margin-bottom:10rpx;">
+        <scroll-view scroll-y style="height:auto; margin-bottom:10rpx; 'background-color:#eee'">
           <text>{{tempSn}}. {{examBody}}</text>
         </scroll-view>
       </block>
@@ -26,7 +26,7 @@
         <image src="http://www.badteacher.club/{{item}}" style='max-width: 100%;max-height: 100%;'></image>
       </view>    
     <view class='body-answer'>
-      <view wx:if="{{typeId!=1 && typeId!=7 && typeId!=8&& typeId!=12}}">
+      <view wx:if="{{typeId!=1 && typeId!=7 && typeId!=8&& typeId!=12 && typeId!=10}}">
         <text>{{tempSn}}. {{answerTitle}}</text>
       </view>
       <view wx:if="{{typeId==8||typeId==9}}">
@@ -36,7 +36,7 @@
             <view wx:if="{{item.answerRight}}" class='colorGreen'>
               <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}　　正确答案</view>
             <view wx:else>
-              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}</view>
+              <text class='answer_letter'>{{item.answer_letter}}.{{item.answerContent}} </text></view>
           </label>
         </checkbox-group>
       </view>
@@ -46,9 +46,10 @@
             <radio value="{{item.answerSn}}" checked="{{item.checked==1}}" color='green' wx:if="{{item.answerRight}}" disabled='true' />
             <radio value="{{item.answerSn}}" checked="{{item.checked==1}}" color="red" wx:else disabled='true' />
             <view wx:if="{{item.answerRight}}" class='colorGreen'>
-              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}　　正确答案</view>
+              <text class='answer_letter'>{{item.answer_letter}}.{{item.answerContent}}　　正确答案 </text>
+              </view>
             <view wx:else>
-              <text class='answer_letter'>{{item.answer_letter}}. </text>{{item.answerContent}}</view>
+              <text class='answer_letter'>{{item.answer_letter}}. {{item.answerContent}}</text></view>
           </label>
         </radio-group>      
       </view>

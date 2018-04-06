@@ -141,6 +141,7 @@ Page({
 
     //console.log('currentcourse:' + wx.getStorageSync('currentCourse'))
     //调用登录接口
+
         wx.showNavigationBarLoading();
         util.getLoginInfo(this.getLogin, app.globalData.url)
 
